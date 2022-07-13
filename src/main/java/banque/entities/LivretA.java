@@ -13,8 +13,8 @@ public class LivretA extends Compte {
 	public LivretA() {
 		
 	}
-	public LivretA(Integer id, String numero, double solde,double taux) {
-		super(id, numero, solde);
+	public LivretA( double solde,double taux,Client client) {
+		super(solde,client);
 		this.taux = taux;
 	
 	}

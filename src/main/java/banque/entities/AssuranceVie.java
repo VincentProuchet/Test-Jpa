@@ -1,7 +1,6 @@
 package banque.entities;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Entity;
 /**
@@ -21,8 +20,8 @@ public class AssuranceVie extends Compte {
 	}
 
 
-	public AssuranceVie(Integer id, String numero, double solde,LocalDate fin,double taux ) {
-		super(id, numero, solde);
+	public AssuranceVie( double solde,LocalDate fin,double taux ,Client client) {
+		super(solde,client);
 		this.dateFin =fin;
 		this.taux = taux;
 	}

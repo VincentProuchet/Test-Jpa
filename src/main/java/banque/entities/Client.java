@@ -1,7 +1,10 @@
 package banque.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -23,13 +26,23 @@ public class Client {
 	private Adresse adresse = new Adresse();
 	@ManyToOne
 	private Banque banque;
-	@ManyToMany
-	private List<Compte> comptes;
+	@ManyToMany (mappedBy = "clients")
+	private Set<Compte> comptes = new HashSet<>();
 	
+	
+	/** Constructeur
+	 * 
+	 */
 	public Client() {
 		
 	}
 
+	/** Constructeur
+	 * @param nom
+	 * @param prenom
+	 * @param dateNaissance
+	 * @param adresse
+	 */
 	public Client( String nom, String prenom, LocalDate dateNaissance, Adresse adresse) {
 		
 		this.nom = nom;
@@ -37,7 +50,15 @@ public class Client {
 		this.dateNaissance = dateNaissance;
 		this.adresse = adresse;
 	}
-
+	/** Constructeur
+	 * @param nom
+	 * @param prenom
+	 */
+	public Client(String nom, String prenom) {
+		this.nom = nom;
+		this.prenom = prenom;
+		
+	}
 	/** Getter
 	 * @return the nom
 	 */
@@ -93,5 +114,34 @@ public class Client {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
+
+	/** Getter
+	 * @return the banque
+	 */
+	public Banque getBanque() {
+		return banque;
+	}
+
+	/** Getter
+	 * @return the comptes
+	 */
+	public Set<Compte> getComptes() {
+		return comptes;
+	}
+
+	/** Setter
+	 * @param banque the banque to set
+	 */
+	public void setBanque(Banque banque) {
+		this.banque = banque;
+	}
+
+	/** Setter
+	 * @param comptes the comptes to set
+	 */
+	public void setComptes(Compte comptes) {
+		this.comptes.add(comptes);
+	}
+	
 	
 }

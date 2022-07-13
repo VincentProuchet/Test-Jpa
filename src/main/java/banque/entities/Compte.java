@@ -1,5 +1,6 @@
 package banque.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -8,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -33,18 +34,18 @@ public class Compte {
 	private double solde;
 	/** operations */
 	@OneToMany (mappedBy = "compte")
-	private Set<Operation> operations;
-	@ManyToOne 
-	private Client client;
+	private Set<Operation> operations = new HashSet<>();
+	@ManyToMany  
+	private Set<Client> clients = new HashSet<>();
 
 	public Compte() {
 		
 	}
 
-	public Compte(Integer id, String numero, double solde){
+	public Compte(double solde,Client client){
 		super();
-		this.id = id;
-		this.numero = numero;
+		
+		this.clients.add(client);
 		this.solde = solde;
 	}
 
@@ -75,6 +76,33 @@ public class Compte {
 	public void setOperations(Set<Operation> operations) {
 		this.operations = operations;
 	}
+	public void addOperation(Operation operation) {
+		this.operations.add(operation);
+		
+	}
+
+	/** Getter
+	 * @return the clients
+	 */
+	public Set<Client> getClients() {
+		return clients;
+	}
+
+	/** Setter
+	 * @param client the client to add
+	 */
+	public void setClients(Client client) {
+		this.clients.add(client);
+		client.setComptes(this);
+	}
+
+	/** Getter
+	 * @return the solde
+	 */
+	public double getSolde() {
+		return solde;
+	}
+	
 	
 	
 }
