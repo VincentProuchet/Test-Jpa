@@ -1,9 +1,12 @@
 package banque.entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * @author Vincent
@@ -17,6 +20,8 @@ public class Banque {
 	private Integer id;
 	/** nom */
 	private String nom;
+	@OneToMany (mappedBy = "banque")
+	private Set<Client> clients;
 	/** Constructeur
 	 * 
 	 */

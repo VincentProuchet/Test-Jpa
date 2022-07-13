@@ -1,12 +1,15 @@
 package banque.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Client {
@@ -18,6 +21,10 @@ public class Client {
 	private  LocalDate dateNaissance;
 	@Embedded
 	private Adresse adresse = new Adresse();
+	@ManyToOne
+	private Banque banque;
+	@ManyToMany
+	private List<Compte> comptes;
 	
 	public Client() {
 		

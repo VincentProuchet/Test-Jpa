@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -33,6 +34,8 @@ public class Compte {
 	/** operations */
 	@OneToMany (mappedBy = "compte")
 	private Set<Operation> operations;
+	@ManyToOne 
+	private Client client;
 
 	public Compte() {
 		
