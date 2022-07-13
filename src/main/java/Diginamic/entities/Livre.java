@@ -68,6 +68,7 @@ public class Livre {
 		return new StringBuilder(this.id)
 				.append("  ").append(this.titre)
 				.append(" : ").append(this.auteur)
+				
 				.toString();
 		
 	}
