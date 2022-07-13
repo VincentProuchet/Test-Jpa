@@ -28,8 +28,47 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 				value="1111" />
 			<property name="javax.persistence.jdbc.driver"
 				value="org.mariadb.jdbc.Driver" />
-			<property name="hibernate.format_sql" value="true"  />
-			<property name="hibernate.show_sql" value="true"  />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
+	</persistence-unit>
+	
+	<!--  Banque  -->
+	<persistence-unit name="pu_banque"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<!-- Classe pour la base de donnée nécessaires car auto-detection désactivée 
+			Parce que on a un autre système ou plusieurs bases de données dans un même 
+			project -->
+		<class>banque.entities.Adresse</class>
+		<class>banque.entities.AssuranceVie</class>
+		<class>banque.entities.Banque</class>
+		<class>banque.entities.Client</class>
+		<class>banque.entities.Compte</class>
+		<class>banque.entities.LivretA</class>
+		<class>banque.entities.Operation</class>
+		<class>banque.entities.Virement</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mariadb://localhost:3307/banque" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password"
+				value="1111" />
+			<property name="javax.persistence.jdbc.driver"
+				value="org.mariadb.jdbc.Driver" />
+			<!-- <property
+				name="javax.presistence.schem-generation.database.action"
+				value="drop-and-create" />
+				-->
+			<!-- Affichage des requêtes SQL -->
+			<property name="hibernate.format_sql" value="true" />
+			<!-- Affichage des requêtes SQL -->
+			<property name="hibernate.show_sql" value="true" />
+			<!-- désactiver l'autodetection des classes de type @Entity -->
+			<property name="hibernate.archive.autodetection" value="" />
+			<!-- Activation de la génération des tables manquantes uniquement -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+
 		</properties>
 	</persistence-unit>
 </persistence>
