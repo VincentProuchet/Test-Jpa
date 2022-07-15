@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 @Entity
 public class AssuranceVie extends Compte {
 	/** date de Fin */
+	private static final String type = "AV";
 	private LocalDate dateFin;
 	/** taux */
 	private double taux;
@@ -20,8 +21,8 @@ public class AssuranceVie extends Compte {
 	}
 
 
-	public AssuranceVie( double solde,LocalDate fin,double taux ,Client client) {
-		super(solde,client);
+	public AssuranceVie( double solde,LocalDate fin,double taux ,String numero,Client client) {
+		super(solde,numero+type,client);
 		this.dateFin =fin;
 		this.taux = taux;
 	}

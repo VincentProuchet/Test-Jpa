@@ -54,9 +54,10 @@ public class Client {
 	 * @param nom
 	 * @param prenom
 	 */
-	public Client(String nom, String prenom) {
+	public Client(String nom, String prenom, Banque banque) {
 		this.nom = nom;
 		this.prenom = prenom;
+		this.banque = banque;
 		
 	}
 	/** Getter

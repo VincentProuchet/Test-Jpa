@@ -9,12 +9,14 @@ import javax.persistence.Entity;
 @Entity
 public class LivretA extends Compte {
 	/** taux */
+	private static final String type= "LA";
 	private double taux;
 	public LivretA() {
 		
 	}
-	public LivretA( double solde,double taux,Client client) {
-		super(solde,client);
+	public LivretA( double solde,double taux,String numero,Client client) {
+		
+		super(solde, numero+type ,client );
 		this.taux = taux;
 	
 	}

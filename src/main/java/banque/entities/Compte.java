@@ -21,74 +21,88 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
-@Inheritance (strategy =InheritanceType.JOINED )
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Compte {
 	/** id */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	/** numero */
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String numero;
 	/** solde */
 	private double solde;
 	/** operations */
-	@OneToMany (mappedBy = "compte")
+	@OneToMany(mappedBy = "compte")
 	private Set<Operation> operations = new HashSet<>();
-	@ManyToMany  
+	@ManyToMany
 	private Set<Client> clients = new HashSet<>();
 
 	public Compte() {
-		
+
 	}
 
-	public Compte(double solde,Client client){
+	public Compte(double solde,String numero , Client client) {
 		super();
-		
+		String banque = client.getBanque().getNom().toUpperCase();
+		this.numero = banque.charAt(0)+ banque.charAt(banque.length()-1)+numero;
 		this.clients.add(client);
 		this.solde = solde;
 	}
 
-	/** Getter
+	/**
+	 * Getter
+	 * 
 	 * @return the id
 	 */
 	public Integer getId() {
 		return id;
 	}
 
-	/** Getter
+	/**
+	 * Getter
+	 * 
 	 * @return the numero
 	 */
 	public String getNumero() {
 		return numero;
 	}
 
-	/** Getter
+	/**
+	 * Getter
+	 * 
 	 * @return the operations
 	 */
 	public Set<Operation> getOperations() {
 		return operations;
 	}
 
-	/** Setter
+	/**
+	 * Setter
+	 * 
 	 * @param operations the operations to set
 	 */
 	public void setOperations(Set<Operation> operations) {
 		this.operations = operations;
 	}
+
 	public void addOperation(Operation operation) {
 		this.operations.add(operation);
-		
+
 	}
 
-	/** Getter
+	/**
+	 * Getter
+	 * 
 	 * @return the clients
 	 */
 	public Set<Client> getClients() {
 		return clients;
 	}
 
-	/** Setter
+	/**
+	 * Setter
+	 * 
 	 * @param client the client to add
 	 */
 	public void setClients(Client client) {
@@ -96,13 +110,32 @@ public class Compte {
 		client.setComptes(this);
 	}
 
-	/** Getter
+	/**
+	 * Getter
+	 * 
 	 * @return the solde
 	 */
 	public double getSolde() {
 		return solde;
 	}
-	
-	
-	
+
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		if (this.numero != null) {
+			str.append(this.numero).append(" ");
+		} else {
+			str.append("no number  ");
+		}
+		str.append(this.solde);
+
+		for (Client c : this.clients) {
+			str.append("\n")
+			.append(c.getNom()).append("  ").append(c.getPrenom())
+			;
+		}
+
+		return str.toString();
+
+	}
+
 }
